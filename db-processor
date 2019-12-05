@@ -1,0 +1,131 @@
+#!/usr/bin/env php
+<?php
+#================================================================
+# Limelight - DB Processor
+#================================================================
+# SYNOPSIS
+#   ./db-processor
+#   ./db-processor [[input-maps]INPUT_MAPS] ...
+#
+# DESCRIPTION
+#    This script is used to process INSERT statements
+#    based on a key-value mapping into a database.
+#    
+#    Processing includes escaping the values (prepared-statements).
+#
+#    The script can work with arguments or env variables.
+#    If no arguments are provided, you must export the required
+#    environment variables prior to running it.
+#
+# ARGUMENTS
+#       [[input-maps]INPUT_MAPS]    Set the key-value map
+#                                   The default value is env INPUT_MAPS
+#                                   Format: String
+#       [[input-host]INPUT_HOST]    Set the mysql host
+#                                   The default value is env INPUT_HOST
+#                                   Format: String|IP
+#       [[input-port]INPUT_PORT]    Set the mysql port
+#                                   The default value is env INPUT_PORT
+#                                   Format: String|Integer
+#       [[input-user]INPUT_USER]    Set the mysql username
+#                                   The default value is env INPUT_USER
+#                                   Format: String
+#       [[input-pass]INPUT_PASS]    Set the mysql password
+#                                   The default value is env INPUT_PASS
+#                                   Format: String
+#       [[input-tabl]INPUT_TABL]    Set the mysql table, eg: db.tbl
+#                                   The default value is env INPUT_TABL
+#                                   Format: String
+#       [[input-debug]INPUT_DEBUG]  Toggle the debug mode
+#                                   The default value is env INPUT_DEBUG
+#                                   or false
+#                                   Format: Boolean/Integer
+#
+# EXAMPLES
+#    ./db-processor "column1=value1;column2=value2" ...
+#
+#================================================================
+#- IMPLEMENTATION
+#-    version         1.0.0
+#-    author          Steven Agyekum <s-8@posteo.mx>
+#-    copyright       Copyright (c) Limelight Gaming Ltd.
+#-    license         MIT License
+#-
+#================================================================
+#================================================================
+
+$ARGC = $_SERVER['argc'];
+$ARGV = $_SERVER['argv'];
+
+$INPUT_MAPS  = $ARGV[1] ?? env("INPUT_MAPS")  ?: err('ERR_NO_INPUT_MAPS', 1);
+$INPUT_HOST  = $ARGV[2] ?? env("INPUT_HOST")  ?: err('ERR_NO_INPUT_HOST', 2);
+$INPUT_PORT  = $ARGV[3] ?? env("INPUT_PORT")  ?: err('ERR_NO_INPUT_PORT', 3);
+$INPUT_USER  = $ARGV[4] ?? env("INPUT_USER")  ?: err('ERR_NO_INPUT_USER', 4);
+$INPUT_PASS  = $ARGV[5] ?? env("INPUT_PASS")  ?: err('ERR_NO_INPUT_PASS', 5);
+$INPUT_TABL  = $ARGV[6] ?? env("INPUT_TABL")  ?: err('ERR_NO_INPUT_TABL', 6);
+$INPUT_DEBUG = $ARGV[7] ?? env("INPUT_DEBUG") ?: 0;
+
+# Extract key mappings
+$EXPRESSION = "/(?:\b(\w+)\=\b([\w\s=+:.?!+\/\\´'\"§%&$,)(#-]+)\;?)/";
+preg_match_all($EXPRESSION, $INPUT_MAPS, $MAPS, PREG_SET_ORDER);
+
+# Pre-process statements
+$KEYS = []; $VALS = [];
+
+foreach( $MAPS as $IDX => $KV )
+{
+  $KEYS[$IDX] = "${KV[1]}=?";
+  $VALS[$IDX] = $KV[2];
+}
+
+$KEYS = join($KEYS, ',');
+
+# Invoke debug mode
+debug($INPUT_DEBUG);
+
+# Insert into database
+try
+{
+  $DB = new PDO("mysql:host=${INPUT_HOST};port=${INPUT_PORT}", $INPUT_USER, $INPUT_PASS);
+  $DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $DB->prepare("INSERT INTO ${INPUT_TABL} SET ${KEYS};")->execute($VALS);
+}
+catch(PDOException $e)
+{
+  err($e->getMessage(), 7);
+}
+
+# Terminate with success
+exit(0);
+
+#================================================================
+# Functions
+#================================================================
+
+function env(string $var)
+{
+  return getenv($var);
+}
+
+function err(string $err, int $code)
+{
+  echo $err;
+  exit($code);
+}
+
+function debug($mode)
+{
+  global $MAPS, $INPUT_TABL, $KEYS, $VALS;
+  
+  if(!$mode) return;
+  
+  echo "[KEYMAPPING]-arg extracted:";
+  print_r($MAPS);
+  
+  echo "\nProcessed SQL Query:\n";
+  echo "INSERT INTO ${INPUT_TABL} SET ${KEYS};";
+  
+  echo "\nPrepared-Statement values:";
+  print_r($VALS); 
+}
+?>

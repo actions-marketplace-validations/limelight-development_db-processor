@@ -1,0 +1,31 @@
+name: CI Test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Insert to demo database (using env)
+      uses: ./
+      env:
+        INPUT_MAPS: column1=value1;column2=value2;
+        INPUT_HOST: ${{ secrets.MYSQL_HOST }}
+        INPUT_PORT: ${{ secrets.MYSQL_PORT }}
+        INPUT_USER: ${{ secrets.MYSQL_USER }}
+        INPUT_PASS: ${{ secrets.MYSQL_PASS }}
+        INPUT_TABL: ${{ secrets.MYSQL_TABL }}
+        INPUT_DEBUG: true
+    - name: Insert to demo database (using with)
+      uses: ./
+      with:
+        maps: column1=value1;column2=value2;
+        host: ${{ secrets.MYSQL_HOST }}
+        port: ${{ secrets.MYSQL_PORT }}
+        user: ${{ secrets.MYSQL_USER }}
+        pass: ${{ secrets.MYSQL_PASS }}
+        tabl: ${{ secrets.MYSQL_TABL }}
+        debug: true
