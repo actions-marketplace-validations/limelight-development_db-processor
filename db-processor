@@ -13,7 +13,7 @@
 #    
 #    Processing includes escaping the values (prepared-statements).
 #
-#    The script can work with arguments or env variables.
+#    The script incorporates arguments and env variables.
 #    If no arguments are provided, you must export the required
 #    environment variables prior to running it.
 #
