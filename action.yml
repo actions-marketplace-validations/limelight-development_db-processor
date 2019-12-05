@@ -4,18 +4,26 @@ description: 'This action is used to process MySQL INSERT statements based on ke
 inputs:
   maps:
     description: 'Set the key-value map'
+    required: false
   host:
     description: 'Set the mysql host'
+    required: false
   port:
     description: 'Set the mysql port'
+    required: false
   user:
     description: 'Set the mysql username'
+    required: false
   pass:
     description: 'Set the mysql password'
+    required: false
   tabl:
     description: 'Set the mysql table, eg: db.tbl'
+    required: false
   debug:
     description: 'Toggle the debug mode'
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
