@@ -1,4 +1,6 @@
-# Limelight - DB Processor
+# Limelight - DB Processor [![master](https://github.com/limelight-development/db-processor/workflows/CI%20Test/badge.svg)](https://github.com/limelight-development/db-processor/actions?query=workflow%3A%22CI+Test%22)
+
+
 ```
 #================================================================
 # Limelight - DB Processor
@@ -56,13 +58,6 @@
 ```
 ---
 
-## Requirements
-
-- MySQL client
-- PHP 7 with PDO extension enabled
-
----
-
 ## Use Case
 
 We use this product in our CD workflows for tracking some commit messages.
@@ -73,7 +68,16 @@ We use this product in our CD workflows for tracking some commit messages.
 
 ### Standalone
 
+Requirements:
+
+- MySQL client
+- PHP 7 with PDO extension enabled
+
+Permissions:
+
 ``chmod +x ./db-processor``
+
+Execution:
 
 ```
 ./db-processor <args>
@@ -158,3 +162,14 @@ jobs:
 ---
 
 Check synopsis above to get an example.
+
+### Demo
+
+Check the Actions tab for a live demo:
+
+[Live Demo](https://github.com/limelight-development/db-processor/commit/9a8572f50193c5f9c624dc7772600cd629bd01c6/checks?check_suite_id=344054328)
+
+### Debug Output
+
+[![debug](https://i.imgur.com/IYt9zKF.png)]
+
