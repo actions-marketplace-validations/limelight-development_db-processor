@@ -69,6 +69,9 @@ $INPUT_DEBUG = $ARGV[7] ?? env("INPUT_DEBUG") ?: 0;
 $EXPRESSION = "/(?:\b(\w+)\=\b([\w\s=+:.?!+\/\\´'\"§%&$,)(#-]+)\;?)/";
 preg_match_all($EXPRESSION, $INPUT_MAPS, $MAPS, PREG_SET_ORDER);
 
+# Check if maps exist
+if(count($MAPS) <= 0) goto success;
+  
 # Pre-process statements
 $KEYS = []; $VALS = [];
 
@@ -96,7 +99,8 @@ catch(PDOException $e)
 }
 
 # Terminate with success
-exit(0);
+success:
+  exit(0);
 
 #================================================================
 # Functions
