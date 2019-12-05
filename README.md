@@ -62,8 +62,6 @@
 
 We use this product in our CD workflows for tracking some commit messages.
 
----
-
 ## Usage
 
 ### Standalone
@@ -92,6 +90,8 @@ or
 when using environment variables.
 
 ### Docker
+
+Build the container using the Dockerfile and run:
 
 ```
 docker run -e INPUT_MAPS="" -e INPUT_HOST="" -e INPUT_PORT="" -e INPUT_USER="" -e INPUT_PASS="" -e INPUT_TABL="" -e INPUT_DEBUG=true
