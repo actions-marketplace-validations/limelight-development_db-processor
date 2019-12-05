@@ -163,13 +163,13 @@ jobs:
 
 Check synopsis above to get an example.
 
-### Demo
+## Demo
 
 Check the Actions tab for a live demo:
 
 [Live Demo](https://github.com/limelight-development/db-processor/commit/9a8572f50193c5f9c624dc7772600cd629bd01c6/checks?check_suite_id=344054328)
 
-### Debug Output
+## Debug Output
 
 [![debug](https://i.imgur.com/IYt9zKF.png)]
 
