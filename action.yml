@@ -1,6 +1,6 @@
 name: 'Limelight - DB Processor'
 author: 'Burnett01'
-description: 'This action is used to process MySQL INSERT statements based on key-value maps into a database. Processing includes escaping the values (prepared-statements).'
+description: 'This action is used to process MySQL INSERT statements based on key-value maps into a database.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
