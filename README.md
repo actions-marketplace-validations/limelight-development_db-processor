@@ -90,7 +90,7 @@ when using environment variables.
 ### Docker
 
 ```
-docker run -e MAPS="" -e INPUT_HOST="" -e INPUT_PORT="" -e INPUT_USER="" -e INPUT_PASS="" -e INPUT_TABL="" -e INPUT_DEBUG=true
+docker run -e INPUT_MAPS="" -e INPUT_HOST="" -e INPUT_PORT="" -e INPUT_USER="" -e INPUT_PASS="" -e INPUT_TABL="" -e INPUT_DEBUG=true
 ```
 
 ### Github Actions
