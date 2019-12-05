@@ -70,7 +70,7 @@ $EXPRESSION = "/(?:\b(\w+)\=\b([\w\s=+:.?!+\/\\´'\"§%&$,)(#-]+)\;?)/";
 preg_match_all($EXPRESSION, $INPUT_MAPS, $MAPS, PREG_SET_ORDER);
 
 # Check if maps exist
-if(count($MAPS) <= 0) goto success;
+if(count($MAPS) <= 0) err('ERR_NO_MAPS_EXTRACTED', 7);
   
 # Pre-process statements
 $KEYS = []; $VALS = [];
@@ -95,12 +95,11 @@ try
 }
 catch(PDOException $e)
 {
-  err($e->getMessage(), 7);
+  err($e->getMessage(), 8);
 }
 
 # Terminate with success
-success:
-  exit(0);
+exit(0);
 
 #================================================================
 # Functions
