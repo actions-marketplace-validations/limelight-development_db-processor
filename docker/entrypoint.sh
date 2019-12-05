@@ -2,6 +2,6 @@
 
 ls -l
 
-chmod +x "/db-processor"
+chmod +x /db-processor
 
-./db-processor
+/db-processor
