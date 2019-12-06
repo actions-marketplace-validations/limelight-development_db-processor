@@ -1,4 +1,4 @@
-name: 'Limelight - DB Processor'
+name: 'DB Processor'
 author: 'Burnett01'
 description: 'This action is used to process MySQL INSERT statements based on key-value maps into a database.'
 runs:
