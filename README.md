@@ -11,7 +11,7 @@
 #
 # DESCRIPTION
 #    This script is used to process INSERT statements
-#    based on a key-value mapping into a database.
+#    based on key-value maps into a database.
 #    
 #    Processing includes escaping the values (prepared-statements).
 #
