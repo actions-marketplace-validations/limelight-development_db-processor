@@ -105,7 +105,7 @@ You can run this action by using the ``with:`` block
   steps:
   - uses: actions/checkout@v1
   - name: Insert to database
-    uses: limelight-development/db-processor@1.0
+    uses: limelight-development/db-processor@2.0
     with:
       maps: column1=value1;column2=value2;
       host: ${{ secrets.MYSQL_HOST }}
@@ -122,7 +122,7 @@ or by using the ``env:`` block for environment variables
   steps:
   - uses: actions/checkout@v1
   - name: Insert to database
-    uses: limelight-development/db-processor@1.0
+    uses: limelight-development/db-processor@2.0
     env:
       INPUT_MAPS: column1=value1;column2=value2;
       INPUT_HOST: ${{ secrets.MYSQL_HOST }}
@@ -148,7 +148,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Insert to database
-      uses: limelight-development/db-processor@1.0
+      uses: limelight-development/db-processor@2.0
       with:
         maps: column1=value1;column2=value2;
         host: ${{ secrets.MYSQL_HOST }}
