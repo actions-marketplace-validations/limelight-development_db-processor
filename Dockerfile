@@ -1,10 +1,7 @@
 FROM burnett0/alpine-php7-cli-pdo-mysql
 
-RUN apk --update --no-cache add bash php7 php7-pdo php7-pdo_mysql
-RUN rm -rf /var/cache/apk/*
-
-ADD db-processor /db-processor
-ADD docker/entrypoint.sh /entrypoint.sh
+COPY db-processor /
+COPY docker/entrypoint.sh /
 
 RUN chmod +x /entrypoint.sh
 
