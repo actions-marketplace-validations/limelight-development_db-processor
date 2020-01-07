@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/burnett01/docker-images/alpine-php7-cli-pdo-mysql:latest
+FROM burnett0/alpine-php7-cli-pdo-mysql
 
 RUN apk --update --no-cache add bash php7 php7-pdo php7-pdo_mysql
 RUN rm -rf /var/cache/apk/*
