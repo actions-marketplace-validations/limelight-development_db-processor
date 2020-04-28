@@ -103,7 +103,7 @@ You can run this action by using the ``with:`` block
 
 ```
   steps:
-  - uses: actions/checkout@v1
+  - uses: actions/checkout@v2
   - name: Insert to database
     uses: limelight-development/db-processor@2.0
     with:
@@ -120,7 +120,7 @@ or by using the ``env:`` block for environment variables
 
 ```
   steps:
-  - uses: actions/checkout@v1
+  - uses: actions/checkout@v2
   - name: Insert to database
     uses: limelight-development/db-processor@2.0
     env:
@@ -146,7 +146,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Insert to database
       uses: limelight-development/db-processor@2.0
       with:
